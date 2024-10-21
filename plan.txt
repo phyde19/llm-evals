@@ -1,0 +1,52 @@
+FIRST PASS: Granular Information Retrieval
+What works for granular information retrieval? 
+No metadata for the first pass. How well can we respond to queries over information *contained* in the documents
+
+Next steps: 
+    - higher level information
+    - relationships across documents
+    - metadata
+
+--------------------------------------------------
+
+mlops website -> crawl, scrape, parse -> markdown 
+
+--------------------------------------------------
+
+
+
+We need ways to add stuff to collection
+Stuff? websites, directories, file(s)
+How {
+    local/UC_volume -> document parsers
+    web -> scrape (max_depth) -> document parsers
+} -> docs 
+
+CollectionEntry {
+    embedding: float[]
+    content: str
+    metadata: dict[str, Any]
+}
+
+docs -> parseCollectionEntries(chunk -> embed-translation -> embed)
+
+Collection could be: (Chroma), pgvector, etc
+
+Collection?
+[
+    {
+        embedding: float[],       <- embed(f(content)) # where 'f' is some function on content
+        content: str              <- content
+        metadata: dict[str, Any]  <- path to content
+    }
+]
+
+-------------------------------------------------------------------
+
+
+Task 1:
+    Scrape https://ml-ops.org/ -> markdown files
+        - store in ./data/mlops_org
+        - IGNORE IMAGES
+        - should follow all links and generate coherent markdown
+        - use markdownify for parsing
